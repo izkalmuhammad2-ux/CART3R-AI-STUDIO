@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090909">
+  <meta name="description" content="CART3R AI STUDIO - studio kreatif AI yang mengutamakan privasi.">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="style.css">
+  <title>CART3R AI STUDIO</title>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-mark">C</div>
+    <div><div class="brand">CART3R <span>AI STUDIO</span></div><small>CREATIVE MOBILE WORKSPACE</small></div>
+    <span class="status"><i></i> READY</span>
+  </header>
+
+  <main>
+    <section class="hero panel">
+      <p class="eyebrow">MOBILE CREATIVE LAB</p>
+      <h1>Imagine.<br><em>Create.</em></h1>
+      <p class="muted">Studio kreatif untuk menyusun prompt, melihat pratinjau foto, dan menghubungkan layanan AI.</p>
+      <div class="hero-tags"><span>LOCAL TOOLS</span><span>AI API READY</span><span>PRIVACY FIRST</span></div>
+    </section>
+
+    <nav class="tabs" aria-label="Navigasi utama">
+      <button class="tab active" data-view="image">Image Studio</button>
+      <button class="tab" data-view="editor">Photo Lab</button>
+      <button class="tab" data-view="settings">Settings</button>
+    </nav>
+
+    <section id="view-image" class="view">
+      <div class="section-head"><div><p class="eyebrow">01 / GENERATOR</p><h2>AI Image Studio</h2></div><span class="pill">PROMPT LAB</span></div>
+      <label for="prompt">Deskripsikan gambar yang ingin dibuat</label>
+      <textarea id="prompt" rows="5" placeholder="Contoh: karakter penjelajah luar angkasa bergaya 3D, pencahayaan sinematik, latar futuristik..."></textarea>
+      <div class="two-col">
+        <div><label for="style">Gaya visual</label><select id="style"><option>Realistis 3D</option><option>Anime</option><option>Ilustrasi digital</option><option>Fotografi sinematik</option><option>Pixel art</option></select></div>
+        <div><label for="ratio">Rasio gambar</label><select id="ratio"><option>1:1</option><option>16:9</option><option>9:16</option><option>4:5</option></select></div>
+      </div>
+      <button id="makePrompt" class="primary">Susun prompt</button>
+      <div class="result-wrap">
+        <div class="result-title">PROMPT SIAP DIGUNAKAN</div>
+        <pre id="promptResult">Prompt kamu akan muncul di sini.</pre>
+        <button id="copyPrompt" class="secondary">Salin prompt</button>
+      </div>
+      <p class="hint">Versi awal membuat dan menyimpan prompt. Untuk menghasilkan gambar AI sungguhan, hubungkan backend/API yang kamu kendalikan. Jangan menaruh API key rahasia di file aplikasi.</p>
+    </section>
+
+    <section id="view-editor" class="view hidden">
+      <div class="section-head"><div><p class="eyebrow">02 / LOCAL EDITOR</p><h2>Photo Lab</h2></div><span class="pill">ON DEVICE</span></div>
+      <label class="upload-box" for="photoInput"><span class="upload-icon">＋</span><strong>Pilih foto dari HP</strong><small>Pratinjau diproses di browser perangkat ini.</small></label>
+      <input id="photoInput" type="file" accept="image/*" hidden>
+      <div class="preview-frame"><img id="photoPreview" alt="Pratinjau foto" hidden><span id="emptyPreview">Belum ada foto dipilih</span></div>
+      <label for="brightness">Kecerahan <output id="brightnessValue">100%</output></label>
+      <input id="brightness" type="range" min="50" max="150" value="100">
+      <label for="contrast">Kontras <output id="contrastValue">100%</output></label>
+      <input id="contrast" type="range" min="50" max="150" value="100">
+      <label for="saturation">Saturasi <output id="saturationValue">100%</output></label>
+      <input id="saturation" type="range" min="0" max="200" value="100">
+      <div class="two-col">
+        <button id="resetFilters" class="secondary">Reset</button>
+        <button id="downloadPhoto" class="primary">Simpan hasil</button>
+      </div>
+      <p class="hint">Edit dasar ini berjalan lokal. Gunakan foto milikmu atau foto yang pemiliknya memberi izin. Tidak ada unggahan otomatis.</p>
+    </section>
+
+    <section id="view-settings" class="view hidden">
+      <div class="section-head"><div><p class="eyebrow">03 / CONFIGURATION</p><h2>Settings</h2></div><span class="pill">V1.0</span></div>
+      <div class="setting-card"><strong>Mode AI</strong><p class="muted">Hybrid: alat edit lokal + layanan AI melalui backend.</p><span class="badge">LOCAL + API</span></div>
+      <div class="setting-card"><strong>Endpoint backend</strong><label for="apiEndpoint">URL backend milikmu</label><input id="apiEndpoint" type="url" placeholder="https://server-kamu.example/api/generate"><button id="saveEndpoint" class="secondary">Simpan alamat</button><small id="endpointStatus" class="muted">Belum dikonfigurasi.</small></div>
+      <div class="setting-card"><strong>Privasi</strong><p class="muted">Foto tidak dikirim ke server oleh fitur Photo Lab versi ini. Jangan memasukkan kata sandi atau API key ke aplikasi frontend.</p></div>
+    </section>
+  </main>
+
+  <footer> CART3R AI STUDIO <span>•</span> BUILD 1.0.0 <br><small>Gunakan teknologi AI secara bertanggung jawab.</small></footer>
+  <script src="app.js"></script>
+  <script>
+    if ("serviceWorker" in navigator && location.protocol.startsWith("http")) {
+      window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js").catch(console.warn));
+    }
+  </script>
+</body>
+</html>
